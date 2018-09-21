@@ -19,37 +19,43 @@ fft_pulse = abs(fft(data_pulse/length(t)));
 
 figure(1);
 
-subplot(4,1,1);
+subplot(5,1,1);
 plot(t,data_pulse);
 hold on;
 plot(t,mean_pulse);
 plot(t,mean_sq_pulse);
 plot(t, var_pulse);
-legend('raw','mean', 'mean square', 'variance')
-title('Time Domain Signal')
+legend('a) Raw','b) Mean', 'b) Mean square', 'b) Variance')
+title('a) Time Domain Signal')
 xlabel('Time (s)') 
 ylabel('Amplitude')
 
-subplot(4,1,2);
+subplot(5,1,3);
 hold on;
 bar(x1_pulse,f_pulse/trapz(x1_pulse,f_pulse));
 plot(x_pulse, p_pulse, 'r');
-title('PDF')
-xlabel('') 
-ylabel('') 
+title('d) PDF')
+ylabel('Frequency') 
 
-subplot(4,1,3);
+subplot(5,1,2);
 plot(f(1:2500/2), fft_pulse(1:end/2));
-title('Frequency Domain Signal')
+title('c) Frequency Domain Signal')
 xlabel('Frequency (Hz)') 
-ylabel('Amplitude') 
+ylabel('Magnitude') 
 
-subplot(4,1,4);
+subplot(5,1,5);
 val_pulse = (fft(data_pulse));
 X_pulse = ifft(cat(1, val_pulse(1:895), val_pulse(1607:end)));
 plot(X_pulse);
+title('h) Filtered Time Domain Signal')
+xlabel('Time (s)') 
+ylabel('Amplitude') 
 
-
+subplot(5,1,4);
+plot(0:0.01:49.98, xcorr(data_pulse))
+title('e) Auto-correlation')
+xlabel('Time (s)') 
+ylabel('Auto-correlation') 
 %% Muscle 
 t = muscle_data(5550:7219,1,:) - 11.0980;
 f = 0:(500/1670):500;
@@ -66,36 +72,43 @@ fft_muscle = abs(fft(data_muscle/length(t)));
 
 figure(2);
 
-subplot(4,1,1);
+subplot(5,1,1);
 plot(t,data_muscle);
 hold on;
 plot(t,mean_muscle);
 plot(t,mean_sq_muscle);
 plot(t, var_muscle);
-legend('raw','mean', 'mean square', 'variance')
-title('Time Domain Signal')
+legend('a) Raw','b) Mean', 'b) Mean square', 'b) Variance')
+title('a) Time Domain Signal')
 xlabel('Time (s)') 
-ylabel('Amplitude') 
+ylabel('Amplitude')
 
-subplot(4,1,2);
+subplot(5,1,3);
 hold on;
 bar(x1_muscle,f_muscle/trapz(x1_muscle,f_muscle));
 plot(x_muscle, p_muscle,'r');
-title('PDF')
-xlabel('') 
-ylabel('') 
+title('d) PDF')
+ylabel('Frequency') 
 
-subplot(4,1,3);
+subplot(5,1,2);
 plot(f(1:1670/2), fft_muscle(1:end/2));
-title('Frequency Domain Signal')
+title('c) Frequency Domain Signal')
 xlabel('Frequency (Hz)') 
-ylabel('Amplitude') 
+ylabel('Magnitude') 
 
-subplot(4,1,4);
+subplot(5,1,5);
 val_muscle = (fft(data_muscle));
 X_muscle = ifft(cat(1, val_muscle(1:167), val_muscle(169:835), val_muscle(836:1503), val_muscle(1505:end)));
 plot(X_muscle);
+title('h) Filtered Time Domain Signal')
+xlabel('Time (s)') 
+ylabel('Amplitude') 
 
+subplot(5,1,4);
+plot(0:0.002:6.6760, xcorr(data_muscle))
+title('e) Auto-correlation')
+xlabel('Time (s)') 
+ylabel('Auto-correlation') 
 %% LED
 t = led(2500:4999,1,:) -  24.9900;
 f = 0:0.04:100;
@@ -112,32 +125,40 @@ fft_pulse = abs(fft(data_led/length(t)));
 
 figure(3);
 
-subplot(4,1,1);
+subplot(5,1,1);
 plot(t,data_led);
 hold on;
 plot(t,mean_led);
 plot(t,mean_sq_led);
 plot(t, var_led);
-legend('raw','mean', 'mean square', 'variance')
-title('Time Domain Signal')
+legend('a) Raw','b) Mean', 'b) Mean square', 'b) Variance')
+title('a) Time Domain Signal')
 xlabel('Time (s)') 
-ylabel('Amplitude') 
+ylabel('Amplitude')
 
-subplot(4,1,2);
+subplot(5,1,3);
 hold on;
 bar(x1_led,f_led/trapz(x1_led,f_led));
 plot(x_led, p_led, 'r');
-title('PDF')
-xlabel('') 
-ylabel('') 
+title('d) PDF')
+ylabel('Frequency') 
 
-subplot(4,1,3);
+subplot(5,1,2);
 plot(f(1:2500/2), fft_pulse(1:end/2));
-title('Frequency Domain Signal')
+title('c) Frequency Domain Signal')
 xlabel('Frequency (Hz)') 
-ylabel('Amplitude') 
+ylabel('Magnitude') 
 
-subplot(4,1,4);
+subplot(5,1,5);
 val_led = (fft(data_led));
 X_led = ifft(cat(1, val_led(1:895), val_led(1607:end)));
 plot(X_led);
+title('h) Filtered Time Domain Signal')
+xlabel('Time (s)') 
+ylabel('Amplitude') 
+
+subplot(5,1,4);
+plot(0:0.01:49.98, xcorr(data_led))
+title('e) Auto-correlation')
+xlabel('Time (s)') 
+ylabel('Auto-correlation') 
